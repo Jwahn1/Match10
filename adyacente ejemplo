@@ -1,0 +1,13 @@
+tablerodeljuego[cordy][cordx]
+tablerodejuego[cordy2][cordx2]
+
+if (tablerodeljuego[cordy2][cordx2] == tablerodejuego[cordy][cordx-1] || tablerodeljuego[cordy2][cordx2] ==  tablerodeljuego[cordy][cordx+1])
+
+if (tablerodeljuego[cordy2][cordx2] == tablerodeljuego[cordy+1][cordx]) || tablerodeljuego[cordy2][cordx2] ==  tablerodeljuego[cordy-1][cordx])
+
+if (tablerodeljuego[cordy2][cordx2] == tablerodeljuego[cordy+1][cordx+1]) || tablerodeljuego[cordy2][cordx2] ==  tablerodeljuego[cordy-1][cordx-1] || tablerodeljuego[cordy2][cordx2] == tablerodeljuego[cordy+1][cordx-1]) || tablerodeljuego[cordy2][cordx2] ==  tablerodeljuego[cordy-1][cordx+1) )
+
+/*
+1. para adyacente izquierda or derecha
+2. para adyacente abajo or arriba
+3. adyacente derechaabajo or arribaizquierda or abajoizquierda or arribaderecha
