@@ -34,6 +34,7 @@ for(int i=0 ; i<3 ; i++) //llena el tablero con numeros aleatorios entre 1 y 9
 } 
 
 
+
 int matchcounter = 0; // esto debe contar cuantos matches hay en el array, este debe ser calculado en el principio del programa
 int repeticiones = 0;
 
@@ -82,8 +83,6 @@ printf("\n");
 
 
 
-
-
 //MAIN LOOP -----------------------------------------------------------------------------------------------
 while ( counter<matchcounter) //cuando la variable counter se igual a matchcounter(la cantidad total de matches en el tablero), el juego termina
 {
@@ -100,7 +99,7 @@ while ( counter<matchcounter) //cuando la variable counter se igual a matchcount
      printf(" \n el counter es %d \n",counter); //indica al programador cuantos matches se han encontrado por el jugador
      
      
-     while (match != 1)
+     while (match != 1) //cuando un match es encontrado regresa aqui para otro turno
      {  
          
          if (playertoken == 1) //determina que jugador va
@@ -147,7 +146,7 @@ while ( counter<matchcounter) //cuando la variable counter se igual a matchcount
                  }
                  
             }   
-            repeat = 1;
+            repeat = 1; //variable para evitar que el jugador elija una casilla vacia
              
              for (i = 0 ; i<3 ; i++) //imrpime el tablero 
                  {
@@ -195,7 +194,7 @@ while ( counter<matchcounter) //cuando la variable counter se igual a matchcount
             
             
             
-            if (tablerodeljuego[cordy][cordx] == tablerodeljuego[cordy2][cordx2]) //al encontrar un par
+            if (tablerodeljuego[cordy][cordx] == tablerodeljuego[cordy2][cordx2]) //al encontrar un par entre las casillas elejidas
             {
                 
                 
