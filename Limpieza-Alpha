@@ -1,0 +1,238 @@
+#include <stdio.h>
+
+int main()
+{
+
+srand(time(NULL));
+int tablerodeljuego[3][5];
+
+int i;
+int j;
+int k;
+
+int cordx = 0; //para el usario 
+int cordy = 0;
+int cordx2 = 0;
+int cordy2 = 0;
+
+int match = 0; //variables occupadas en while loops
+int repeat = 1;
+int counter =0;
+
+int playertoken=1; //decide que jugador le toca elegir
+
+
+//----------------------------------------------------------------------------------------------------- pre programa
+
+
+for(int i=0 ; i<3 ; i++) //llena el tablero con numeros aleatorios entre 1 y 9
+{
+    for(int j = 0 ; j<5 ; j++)
+     {
+         tablerodeljuego[i][j]=rand() % 9+1 ;
+     }
+} 
+
+
+int matchcounter = 0; // esto debe contar cuantos matches hay en el array, este debe ser calculado en el principio del programa
+int repeticiones = 0;
+
+
+for (k=1 ; k<10 ; k++) //compara cuantas veces esta un numero en el tablero entre 1 y 9
+{    
+    repeticiones = 0;
+    printf("\n");
+    
+     for (i = 0 ; i<3 ; i++) 
+     {
+         for (j = 0 ; j<5 ; j++)
+         {
+             if (k == tablerodeljuego[i][j])
+             {
+                 repeticiones = repeticiones+1; //cada vez que el loop encuentra el numero k adentro del tablero se le agrega un 1 al valor de repeticiones
+                 printf("%d se repite %d vez \t",k,repeticiones);
+                 if (repeticiones % 2 == 0) //cada vez que la cantidad de repeticiones de un numero es igual a un numero par se le agrega un 1 al valor de matchcounter
+                 {
+                     matchcounter= matchcounter+1;
+                 }
+             }
+         }
+     }
+}
+printf("\n");
+printf("%d matchcounter \n",matchcounter);
+
+
+
+//------------------------------------------------------------------------------------------------------ introduccion al usuario
+
+printf("\t*****Match10!!!*****");  //imprime el primer tablero
+
+     for (i = 0 ; i<3 ; i++) 
+     {
+         printf("\n");
+         
+         for (j = 0 ; j<5 ; j++)
+         {
+             printf("%d  \t", tablerodeljuego[i][j]);
+         }  
+     }
+
+printf("\n");
+
+
+
+
+
+//MAIN LOOP -----------------------------------------------------------------------------------------------
+while ( counter<matchcounter) //cuando la variable counter se igual a matchcounter(la cantidad total de matches en el tablero), el juego termina
+{
+     printf("\n");
+     match = 0; //variable que indica cuando se encuentra un par de cartas
+     repeat=1;
+     
+     //reseta las cords cada vez que se repite el loop 
+     cordx=0;
+     cordy=0;
+     cordx2=0;
+     cordy2=0;
+     
+     printf(" \n el counter es %d \n",counter); //indica al programador cuantos matches se han encontrado por el jugador
+     
+     
+     while (match != 1)
+     {  
+         
+         if (playertoken == 1) //determina que jugador va
+        {
+             printf("\n\nJUGADOR 1 \n");
+        }   
+         else
+        {
+             printf("\n\nJUGADOR 2 \n");
+        }
+         
+         
+         
+        for (i = 0 ; i<3 ; i++) //imprime el tablero
+        {
+             printf("\n");
+             
+              for (j = 0 ; j<5 ; j++)
+             {
+                  printf("%d  \t", tablerodeljuego[i][j]);
+             }  
+         }       
+         
+            repeat=1; //variable para evitar que el jugador elija una casilla vacia
+            while (repeat == 1)
+            {
+                
+                 printf("\n");  //pregunta al usuario su primera casilla
+                 printf("eliga su primera casilla\n");
+                 printf("cuantas lineas abajo \n");
+                 scanf("%d",&cordy);
+                 printf("cuantas lineas a la derecha \n");
+                 scanf("%d",&cordx);
+                 
+                 
+                 if (tablerodeljuego[cordy][cordx]==0) //checkea si se elijio una casilla vacia
+                 {
+                    printf("esta casilla ya esta descubierta \n");
+                 }
+                 else 
+                 {
+                     
+                     repeat = 0;
+                 }
+                 
+            }   
+            repeat = 1;
+             
+             for (i = 0 ; i<3 ; i++) //imrpime el tablero 
+                 {
+                     printf("\n");
+                            
+                     for (j = 0 ; j<5 ; j++)
+                     {
+                     printf("%d  \t", tablerodeljuego[i][j]);
+                     }   
+                 }
+              
+             while (repeat == 1)
+             {
+             printf("\n");  //pregunta la segunda casilla a elegir
+             printf("eliga su segunda casilla\n");
+             printf("cuantas lineas abajo \n");
+             scanf("%d",&cordy2);
+             printf("cuantas lineas a la derecha \n");
+             scanf("%d",&cordx2);
+              
+                 if (tablerodeljuego[cordy2][cordx2]==0)  //checkea si se elijio una casilla vacia
+                 {
+                    printf("esta casilla ya esta descubierta \n");
+                 }
+                 else 
+                 {
+                     repeat = 0;
+                 }
+                 
+             }
+            
+            
+            while (cordx2 == cordx && cordy2 == cordy) //loop solo para evitar que causen un error por elejir la misma casilla does veces
+            {
+                
+             printf("no puede elegir la misma casilla dos veces \n");
+             printf("\n");
+             printf("eliga su segunda casilla\n");
+             printf("cuantas lineas abajo \n");
+             scanf("%d",&cordy2);
+             printf("cuantas lineas a la derecha \n");
+             scanf("%d",&cordx2);
+            
+            }
+            
+            
+            
+            if (tablerodeljuego[cordy][cordx] == tablerodeljuego[cordy2][cordx2]) //al encontrar un par
+            {
+                
+                
+                 printf("\nencontro un match \n");
+                 match = 1; //un match encontrado entonces el loop termina aqui inmediatamente
+                 counter = counter + 1; //cantidad de pares encontrados + 1
+                 tablerodeljuego[cordy][cordx]=0;
+                 tablerodeljuego[cordy2][cordx2]=0;
+                 for (i = 0 ; i<3 ; i++) //imrpime el tablero 
+                 {
+                     printf("\n");
+                            
+                     for (j = 0 ; j<5 ; j++)
+                     {
+                     printf("%d  \t", tablerodeljuego[i][j]);
+                     }   
+                 }
+            }
+            
+            if(match == 0) //si no fue un match cambia de jugador y no cambia nada en el tablero
+            {
+                 if (playertoken == 1)  //cambia de jugadora dependiendo de quien esta en turno
+                 {
+                     playertoken=0;
+                 }   
+                 else 
+                 {
+                     playertoken=1;
+                 }   
+                 
+                 printf("\nNo Match \n"); 
+                 
+            }
+            
+     }       
+}
+printf("\n todas las parejas de tarjetas fueron encontradas");
+    
+    return 0;
+}
