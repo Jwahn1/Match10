@@ -3,9 +3,9 @@
 
 -hacer que cuando una fila se termine la fila de abajo se suba
 -sistema de puntos completo
--el ultimo numero que no es un 0 en el grid se puede juntar con el primero numero en el array 
--tener los numeros afuera del tablero que digan las coordenadas
-hacer un check al final que vea si todos los pares tienen al menos un adyacente, si no termina el juego
+-el ultimo numero que no es un 0 en el grid se puede juntar con el primero numero en el array
+-hacer un check de adyacentes para que el jugeo cuente pares que son iguales a 10
+
 */
 int main()
 {
@@ -22,11 +22,13 @@ int cordy = 0;
 int cordx2 = 0;
 int cordy2 = 0;
 
-int match = 0; //variables occupadas en while loops
+int match = 0; //variables ocupadas en while loops
 int repeat = 1;
 int counter =0;
 int GAMEEND = 0;
 int finisher = 0;
+
+
 
 //----------------------------------------------------------------------------------------------------- pre programa
 for(int i=0 ; i<11 ; i++) //llena el tablero con numeros vacios 
@@ -41,42 +43,12 @@ for(int i=1 ; i<10 ; i++) //llena el tablero con numeros aleatorios entre 1 y 9
 {
     for(int j=1 ; j<10 ; j++)
      {
-         tablerodeljuego[i][j]=rand()%9+1;
+         tablerodeljuego[i][j]=rand() % 9+1;
      }
 } 
 
-int matchcounter = 0; // esto debe contar cuantos matches hay en el array, este debe ser calculado en el principio del programa
-int repeticiones = 0;
 
 
-/*for (k=1 ; k<10 ; k++) //compara cuantas veces esta un numero en el tablero entre 1 y 9
-{    
-    repeticiones = 0;
-    printf("\n");
-    
-     for (i = 0 ; i<9 ; i++) 
-     {
-         for (j = 0 ; j<9 ; j++)
-         {
-             if (k == tablerodeljuego[i][j])
-             {
-                 repeticiones = repeticiones+1; //cada vez que el loop encuentra el numero k adentro del tablero se le agrega un 1 al valor de repeticiones
-                 printf("%d se repite %d vez \t",k,repeticiones);
-                 if (repeticiones % 2 == 0) //cada vez que la cantidad de repeticiones de un numero es igual a un numero par se le agrega un 1 al valor de matchcounter
-                 {
-                     matchcounter= matchcounter+1;
-                 }
-             }
-         }
-     }
-}
-printf("\n");
-printf("%d matchcounter \n",matchcounter);
-*/
-
-
-
-//------------------------------------------------------------------------------------------------------ introduccion al usuario
 
 
 //MAIN LOOP---------------------------------------------------------------------------------------------
@@ -93,10 +65,12 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
     cordy2=0;
     finisher=0;
 
-    printf("\nel counter es %d \n", counter); //indica al programador cuantos matches se ha encontrado por el jugador
+    printf("\nla cantidad de puntos es %d \n", counter); //indica al programador cuantos matches se ha encontrado por el jugador
+
 
     for(i=0; i<11; i++) //checkea si aun quedan matches adyacentes en el tablero
     {
+
         for(j=0; j<11; j++)
         {
             cordx = j;
@@ -114,16 +88,18 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
                         ((tablerodeljuego[i][j] != tablerodeljuego[i-1][j+1]) || (tablerodeljuego[i][j] == 0 && tablerodeljuego[i-1][j+1] == 0)))
                         {
                             finisher=finisher+1;
-                            //printf("casilla y%d x%d no tiene pareja adyacente \t, cordy, cordx");
-                        }
-                        else
-                        {
-                            printf("casilla y%d x%d tiene pareja\n", i-1,j-1);
                         }
             }
         }
     }
-    printf("finisher %d \n", finisher);
+
+    //aqui hacer un check muy similar al de atras que haga por ejemplo if (tablerodeljuego[i][j] + tablerodeljuego[i][j+1] != 10)
+    //                                                                   {
+    //                                                                      finisher+1
+    //                                                                  }
+    //y tal vez poner que finisher tenga que ser 162 porque asi el programa checkea que todas las casillas no tiene A: adyacentes que son el mismo numero y B: adyacentes que son iguales a 10
+    
+    
     if(finisher==81)
     {
         GAMEEND=1;
@@ -137,11 +113,16 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
     cordx2=0;
     cordy2=0;
 
+
+
     while (match != 1) //cuando un match es encontrado regresa aqui para otro turno
     {
 
-        printf("\t*****Match!!!*****\n"); //imprime el primer tablero
-         printf("   0 1 2 3 4 5 6 7 8\n");
+
+
+
+        printf("\t*****Match10!!!*****\n"); //imprime el primer tablero
+         printf("        0  1  2  3  4  5  6  7  8\n");
 
             for(i=0; i<11; i++)
             {
@@ -155,14 +136,15 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
                 for(j=0; j<11; j++)
                 {
 
-                    if(tablerodeljuego[i][j]==0)
-                    {
-                        printf("  ");
-                    }
-                    if(tablerodeljuego[i][j]!=0)
-                    {
-                        printf("|%d|", tablerodeljuego[i][j]);
-                    }
+
+                        if(tablerodeljuego[i][j]==0)
+                        {
+                            printf("   ");
+                        }
+                        if(tablerodeljuego[i][j]!=0)
+                        {
+                            printf("|%d|", tablerodeljuego[i][j]);
+                        }
                 }
                 printf("\n");
             }                
@@ -173,34 +155,33 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
              while (repeat == 1)
              {
 
-                printf("\n"); //pregunta al usuario su primera casilla
-                printf("eliga su primera casilla\n");
-                printf("cuantas lineas abajo \n");
-                scanf("%d",&cordy);
-                printf("cuantas lineas a la derecha \n");
-                scanf("%d",&cordx);
+                 printf("\n"); //pregunta al usuario su primera casilla
+                 printf("eliga su primera casilla\n");
+                 printf("cuantas lineas abajo \n");
+                 scanf("%d",&cordy);
+                 printf("cuantas lineas a la derecha \n");
+                 scanf("%d",&cordx);
                 
-                cordy = cordy + 1;
-                cordx = cordx2 +1;
-
-                if (tablerodeljuego[cordy][cordx]==0) //checkea si se elijio una casilla vacia
-                {
+                 cordy = cordy + 1;
+                 cordx = cordx2 +1;
+                 if (tablerodeljuego[cordy][cordx]==0) //checkea si se elijio una casilla vacia
+                 {
                     printf("esta casilla es incorrecta \n");
-                }
-                else 
-                {
+                 }
+                 else 
+                 {
                     repeat = 0;
-                }
+                 }
                     
             }
 
              repeat =  1; //variable para evitar que el jugador elija una casilla vacia
                 
-             printf("\t*****Match!!!*****\n"); //imprime el primer tablero
-             printf("   0 1 2 3 4 5 6 7 8\n");
+             printf("\t*****Match10!!!*****\n"); //imprime el primer tablero
+             printf("         0  1  2  3  4  5  6  7  8\n");
 
-            for(i=0; i<11; i++)
-            {   printf("\n");
+             for(i=0; i<11; i++)
+             {   printf("\n");
                 if(i<10)
                 {
                     if(i!=0)
@@ -211,14 +192,16 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
                 for(j=0; j<11; j++)
                 {
 
-                    if(tablerodeljuego[i][j]==0)
-                    {
-                        printf(" ");
-                    }
-                    if(tablerodeljuego[i][j]!=0)
-                    {
-                        printf("|%d|", tablerodeljuego[i][j]);
-                    }
+                    
+                        if(tablerodeljuego[i][j]==0)
+                        {
+                            printf("   ");
+                        }
+                        if(tablerodeljuego[i][j]!=0)
+                        {
+                            printf("|%d|", tablerodeljuego[i][j]);
+                        }
+                     
                 }
             }      
 
@@ -232,8 +215,8 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
                 scanf("%d",&cordy2);
                 printf("cuantas lineas a la derecha \n");
                 scanf("%d",&cordx2);
-                 cordx2 = cordx2 + 1;
-                 cordy2 = cordy2 + 1;
+                cordx2 = cordx2 + 1;
+                cordy2 = cordy2 + 1;
                     if (tablerodeljuego[cordy2][cordx2]==0) //checkea si se elijio una casilla vacia
                     {
                         printf("esta casilla es incorrecta \n");
