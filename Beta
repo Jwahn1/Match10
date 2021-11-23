@@ -93,14 +93,35 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
         }
     }
 
-    //aqui hacer un check muy similar al de atras que haga por ejemplo if (tablerodeljuego[i][j] + tablerodeljuego[i][j+1] != 10)
-    //                                                                   {
-    //                                                                      finisher+1
-    //                                                                  }
-    //y tal vez poner que finisher tenga que ser 162 porque asi el programa checkea que todas las casillas no tiene A: adyacentes que son el mismo numero y B: adyacentes que son iguales a 10
+    for(i=0; i<11; i++) 
+        {
+
+            for(j=11; j<11; j++)
+            {
+                cordx = j;
+                cordy = i;
+                if((i>0 && j>0) && (i<10 && j<10))
+                {
+                    if((tablerodeljuego[i][j] + tablerodeljuego[i][j-1] != 10) && //segundo check que determina si existen pares posibles que sean iguales a 10 en la matriz
+                            (tablerodeljuego[i][j] + tablerodeljuego[i][j+1] != 10) && //como analiza casilla por casilla esto 
+                            (tablerodeljuego[i][j] + tablerodeljuego[i+1][j] != 10) &&
+                            (tablerodeljuego[i][j] + tablerodeljuego[i-1][j] != 10) &&
+                            (tablerodeljuego[i][j] + tablerodeljuego[i+1][j+1] != 10) &&
+                            (tablerodeljuego[i][j] + tablerodeljuego[i-1][j-1] != 10) &&
+                            (tablerodeljuego[i][j] + tablerodeljuego[i+1][j-1] != 10) &&
+                            (tablerodeljuego[i][j] + tablerodeljuego[i-1][j+1] != 10))
+                            {
+                                finisher=finisher+1;
+                            }
+                }
+            }
+        }
+
     
-    
-    if(finisher==81)
+
+
+
+    if(finisher==162) //81 casillas que pueden tener adyacentes donde los dos son el mismo numero y 81 casillas que tienen adyacentes que popdrian ser iguales a 10 >>>>> 162 casos posibles 
     {
         GAMEEND=1;
         break;
@@ -115,10 +136,10 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
 
 
 
-    while (match != 1) //cuando un match es encontrado regresa aqui para otro turno
+     while (match != 1) //cuando un match es encontrado regresa aqui para otro turno
     {
-
-
+     
+     
 
 
         printf("\t*****Match10!!!*****\n"); //imprime el primer tablero
@@ -207,6 +228,7 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
 
             printf("\n");
 
+
             while (repeat == 1)
              {
                 printf("\n");  //pregunta la segunda casilla a elegir 
@@ -224,8 +246,10 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
                     else 
                     {
                         repeat = 0;
-                    }      
+                    }   
+
             }
+
 
              while (cordx2 == cordx && cordy2 == cordy) //loop solo para evitar que causen un error por elejir la misma casilla dos veces
              {
@@ -237,12 +261,17 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
              scanf("%d",&cordy2);
              printf("cuantas lineas a la derecha \n");
              scanf("%d",&cordx2);
+             cordx2 = cordx2 +1;
+             cordy2 = cordy2 +1;
             
+
             }
 
 
-            if (tablerodeljuego[cordy][cordx] == tablerodeljuego[cordy2][cordx2] )   //largo check que busca saber si la segunda casilla es adyacente a la primera  y que el valor de la casilla 1 es = a casilla 2 
+
+            if ((tablerodeljuego[cordy][cordx] == tablerodeljuego[cordy2][cordx2]) || (tablerodeljuego[cordy][cordx] + tablerodeljuego[cordy2][cordx2] ==10))  //largo check que busca saber si la segunda casilla es adyacente a la primera  y que el valor de la casilla 1 es = a casilla 2 
             {
+                
                   if(cordx2 == cordx-1 || 
                     cordx2 ==  cordx+1 ||
                     cordy2 == cordy+1 || 
@@ -252,12 +281,28 @@ while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cant
                     (cordy2  == cordy+1  && cordx2 == cordx-1)|| 
                     (cordy2  ==  cordy-1  && cordx2 == cordx+1))
                     {       
-                     printf("\nencontro un match \n");
-                     match = 1; //un match encontrado entonces el loop termina aqui inmediatamente
-                     counter = counter + 1; //cantidad de pares encontrados + 1
-                     tablerodeljuego[cordy][cordx]=0;
-                     tablerodeljuego[cordy2][cordx2]=0;
+                        printf("\nencontro un match \n");
+                        match = 1; //un match encontrado entonces el loop termina aqui inmediatamente
+                        counter = counter + 1; //cantidad de pares encontrados + 1
+                        tablerodeljuego[cordy][cordx]=0;
+                        tablerodeljuego[cordy2][cordx2]=0;
                     }
+
+                   if(((cordx2 + cordx-1)==10) || 
+                    ((cordx2 +  cordx+1)==10) ||
+                    ((cordy2 + cordy+1)==10) || 
+                    ((cordy2 +  cordy-1)==10)||
+                    (((cordy2 + cordy+1)==10) && ((cordx2 + cordx+1)==10)) ||
+                    (((cordy2  +  cordy-1)==10) && ((cordx2 + cordx-1)==10)) ||
+                    (((cordy2  + cordy+1)==10)  && ((cordx2 + cordx-1)==10)) || 
+                    (((cordy2  +  cordy-1)==10)  && ((cordx2 + cordx+1)==10)))
+                    {       
+                        printf("\nencontro un match \n");
+                        match = 1; //un match encontrado entonces el loop termina aqui inmediatamente
+                        counter = counter + 1; //cantidad de pares encontrados + 1
+                        tablerodeljuego[cordy][cordx]=0;
+                        tablerodeljuego[cordy2][cordx2]=0;
+                    } 
             }
             
             if(match == 0) //si no fue un match no cambia nada en el tablero
