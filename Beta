@@ -160,7 +160,7 @@ int main()
               
              printf("\nla cantidad de puntos es %d \n", counter); 
 
-             if(finisher > 2)
+             if(finisher > 162)
              {
                   break;
              }                                
