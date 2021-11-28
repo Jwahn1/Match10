@@ -59,9 +59,8 @@ int main()
          int counter =0;
          int GAMEEND = 0;
          int finisher = 0;
-         int line = 0; //variable que cuenta si una linea entera esta vacia, y se resetea cada vez que una linea es analizada por el codigo
+         int subir = 2; //variable que cuenta si una linea entera esta vacia, y se resetea cada vez que una linea es analizada por el codigo
          
-          
             
          
          
@@ -99,9 +98,67 @@ int main()
              cordx2=0;
              cordy2=0;
              finisher=0;
+             
                 
-             //aqui hacer un for loop que revise toda una linea y si toda la linea es igual a 0 entonces dar 10 puntos a la variable counter   
-                
+             printf("1. elegir casilla? \n");
+             printf("2. subir 3 filas? %d chances mas quedan \n",subir);
+             scanf("%d",&switcher);
+             
+             switch(switcher)
+             {
+                 case 1: 
+                 break;
+                 
+                 case 2:
+                 if(subir == 2)
+                 
+                 {
+                     for(k =1 ; k<10 ; k++)
+                       
+                     {
+                         
+                         
+                          tablerodeljuego[1][k] = 0;
+                          tablerodeljuego[1][k] = tablerodeljuego[1][k] + tablerodeljuego[4][k];
+                          tablerodeljuego[4][k] = 0;
+                          
+                          tablerodeljuego[2][k] = 0;
+                          tablerodeljuego[2][k] = tablerodeljuego[2][k] + tablerodeljuego[5][k];
+                          tablerodeljuego[5][k] = 0;
+                         
+                          
+                          tablerodeljuego[3][k] = 0;
+                          tablerodeljuego[3][k] = tablerodeljuego[3][k] + tablerodeljuego[6][k];
+                          tablerodeljuego[6][k] = 0;
+                         
+                     }
+                 }
+                 
+                 if (subir == 1)
+                 {
+                      for(k =1 ; k<10 ; k++)
+                       
+                     {
+                         
+                         
+                          tablerodeljuego[1][k] = 0;
+                          tablerodeljuego[1][k] = tablerodeljuego[1][k] + tablerodeljuego[7][k];
+                          tablerodeljuego[7][k] = 0;
+                          
+                          tablerodeljuego[2][k] = 0;
+                          tablerodeljuego[2][k] = tablerodeljuego[2][k] + tablerodeljuego[8][k];
+                          tablerodeljuego[8][k] = 0;
+                         
+                          
+                          tablerodeljuego[3][k] = 0;
+                          tablerodeljuego[3][k] = tablerodeljuego[3][k] + tablerodeljuego[9][k];
+                          tablerodeljuego[9][k] = 0;
+                         
+                     }
+                 }
+                 subir = subir - 1;
+                 break;
+             }
                 
              for(i=0; i<11; i++) //checkea si aun quedan matches adyacentes en el tablero
              {
@@ -157,10 +214,10 @@ int main()
                  }
              }
               
-              
+             
              printf("\nla cantidad de puntos es %d \n", counter); 
-
-             if(finisher > 162)
+               
+             if(finisher > 161)
              {
                   break;
              }                                
@@ -234,7 +291,7 @@ int main()
                  printf("\t*****Match10!!!*****\n"); //imprime el primer tablero
                  printf("         0  1  2  3  4  5  6  7  8\n");
                  
-                 for(i=0; i<11; i++) 
+                 for(i=0; i<4; i++) 
                  {  
                      printf("\n");
                      if(i<10)
@@ -319,15 +376,16 @@ int main()
                          counter = counter + 1; //cantidad de pares encontrados + 1
                          tablerodeljuego[cordy][cordx]=0;
                          tablerodeljuego[cordy2][cordx2]=0;
-
-                     }  
+                        
+                     }
+                 }
                     
                  if(match == 0) //si no fue un match no cambia nada en el tablero
                  {
                      printf("\nNo Match \n"); 
                  }
-                              
-                 }  
+                    
+                   
              
              }
          
