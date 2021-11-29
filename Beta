@@ -6,6 +6,10 @@
 
 
 */
+
+void printTablero(int tablerodeljuego[11][11]);
+void menu();
+
 int main()
 {
      
@@ -18,9 +22,12 @@ int main()
          while(looper == 0)
          {
              //Main Menu
-             printf(" 1.Jugar \n 2.Score Total Anterior \n 3.Quit\n");
-             scanf("%d",&switcher);
              
+             menu();
+             
+             printf(" Seleccione una opcion: \n");
+             scanf("%d",&switcher);
+            
              switch(switcher)
              {
                  case 1:  //solo sale del loop y empieza el juego
@@ -235,30 +242,7 @@ int main()
                  printf("\t*****Match10!!!*****\n"); //imprime el primer tablero
                  printf("        0  1  2  3  4  5  6  7  8\n");
                  
-                 for(i=0; i<11; i++)
-                 {
-                     if(i<10)
-                     {
-                        if(i !=0)
-                         {
-                            printf("%d   ", i-1);
-                         }
-                     } 
-                     for(j=0; j<11; j++)
-                     {
-                         
-                         if(tablerodeljuego[i][j]==0)
-                         {
-                             printf("   ");
-                         }
-                         
-                         if(tablerodeljuego[i][j]!=0)
-                         {
-                             printf("|%d|", tablerodeljuego[i][j]);
-                         }
-                     }    
-                     printf("\n");
-                 }                
+                 printTablero(tablerodeljuego);   
                   
                  printf("\n");
                  
@@ -291,32 +275,7 @@ int main()
                  printf("\t*****Match10!!!*****\n"); //imprime el primer tablero
                  printf("         0  1  2  3  4  5  6  7  8\n");
                  
-                 for(i=0; i<4; i++) 
-                 {  
-                     printf("\n");
-                     if(i<10)
-                     {
-                        if(i!=0)
-                         {
-                             printf("%d   ", i-1);
-                         }
-                     
-                     }
-                     for(j=0; j<11; j++)
-                     {
-                     
-                       
-                         if(tablerodeljuego[i][j]==0)
-                         {
-                             printf("   ");
-                         }
-                         if(tablerodeljuego[i][j]!=0)
-                         {
-                             printf("|%d|", tablerodeljuego[i][j]);
-                         }
-                         
-                     }
-                 }      
+                 printTablero(tablerodeljuego);   
                  
                  printf("\n");
                  
@@ -402,3 +361,37 @@ int main()
      printf("Gracias por jugar");
      return 0;
 }
+
+    void printTablero(int tablerodeljuego[11][11])
+    {
+        for(int i=0; i<4; i++)
+         {
+             if(i<10)
+             {
+                if(i !=0)
+                 {
+                     printf("%d   ", i-1);
+                 }
+             } 
+             for(int j=0; j<11; j++)
+             {
+                             
+                 if(tablerodeljuego[i][j]==0)
+                 {
+                     printf("   ");
+                 }
+                             
+                 if(tablerodeljuego[i][j]!=0)
+                 {
+                     printf("|%d|", tablerodeljuego[i][j]);
+                 }
+             }    
+                printf("\n");
+         }           
+    }
+
+void menu()
+{
+    printf(" 1.Jugar \n 2.Score Total Anterior \n 3.Quit\n");
+}
+
