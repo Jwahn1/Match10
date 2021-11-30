@@ -98,12 +98,13 @@ int main()
              match = 0; //variable que indica cuando se encuentra un par de cartas
              repeat=1;
                 
-             //resetea las cords cada vez que se repite el loop 
+             //resetea estas variables cada vez que se repite el loop del juego 
              cordx=0;
              cordy=0;
              cordx2=0;
              cordy2=0;
              finisher=0;
+             switcher = 0;
              
              printf("\t*****Match10!!!*****\n"); //imprime el primer tablero
              printf("        0  1  2  3  4  5  6  7  8\n");
@@ -111,16 +112,23 @@ int main()
              printTablero(tablerodeljuego);   
              printf("\n");
                 
-             printf("1. elegir casilla? \n");
-             printf("2. remplazar las 3 filas por otras mas? %d chances mas quedan \n",subir);
-             scanf("%d",&switcher);
-             
+             while (switcher < 1|| switcher > 2)
+             {
+                 printf("1. elegir casilla? \n");
+                 printf("2. remplazar las 3 filas por otras mas? %d chances mas quedan \n",subir);
+                 scanf("%d",&switcher);
+                 if(subir == 0 && switcher == 2) //cuando se queda sin chances de subir filas, el programa detiene al jugador de volverlo hacer
+                 {
+                     switcher =3;
+                 }
+                 
+             }
              
              
              switch(switcher)
              {
                  case 1: 
-                 break;
+                 break; //solo continua el juego
                  
                  case 2:
                  if(subir == 2)
@@ -131,7 +139,7 @@ int main()
                      {
                          
                          
-                          tablerodeljuego[1][k] = 0;
+                          tablerodeljuego[1][k] = 0; //la primera vez que el jugador pide cambiar las tres filas hace esta funcion adonde toma las lineas escondidas 4 5 y 6 y remplaza  1 2 y 3 por ellas. lineas 4 5 y 6 se llenan de 0s
                           tablerodeljuego[1][k] = tablerodeljuego[1][k] + tablerodeljuego[4][k];
                           tablerodeljuego[4][k] = 0;
                           
@@ -154,7 +162,7 @@ int main()
                      {
                          
                          
-                          tablerodeljuego[1][k] = 0;
+                          tablerodeljuego[1][k] = 0; // la segunda vez que pregunte se le acaban los chances y sube las filas 7 8 y 9 y las remplaza por 1 2 y 3.  tambien las filas 7 8 y 9 se llenan de 0s
                           tablerodeljuego[1][k] = tablerodeljuego[1][k] + tablerodeljuego[7][k];
                           tablerodeljuego[7][k] = 0;
                           
