@@ -1,11 +1,4 @@
 #include <stdio.h>
-/* a crear
--hacer que cuando una fila se termine la fila de abajo se suba
--sistema de puntos completo
--el ultimo numero que no es un 0 en el grid se puede juntar con el primero numero en el array
-
-
-*/
 
 void printTablero(int tablerodeljuego[11][11]);
 
@@ -403,4 +396,3 @@ int main()
                 printf("\n");
          }           
     }
-
