@@ -8,7 +8,6 @@
 */
 
 void printTablero(int tablerodeljuego[11][11]);
-void menu();
 
 int main()
 {
@@ -23,7 +22,7 @@ int main()
          {
              //Main Menu
              
-             menu();
+             printf(" 1.Jugar \n 2.Score Total Anterior \n 3.Quit\n");
              
              printf(" Seleccione una opcion: \n");
              scanf("%d",&switcher);
@@ -106,10 +105,17 @@ int main()
              cordy2=0;
              finisher=0;
              
+             printf("\t*****Match10!!!*****\n"); //imprime el primer tablero
+             printf("        0  1  2  3  4  5  6  7  8\n");
+             
+             printTablero(tablerodeljuego);   
+             printf("\n");
                 
              printf("1. elegir casilla? \n");
-             printf("2. subir 3 filas? %d chances mas quedan \n",subir);
+             printf("2. remplazar las 3 filas por otras mas? %d chances mas quedan \n",subir);
              scanf("%d",&switcher);
+             
+             
              
              switch(switcher)
              {
@@ -349,7 +355,7 @@ int main()
              }
          
          }
-     printf("\ntodas las parejas de tarjetas fueron encontradas");
+     printf("\ntodas las parejas fueron encontradas");
      printf("\nsu puntaje total es %d \n", counter);
      printf("su puntaje de su juego anterior es igual a %d \n",PRESCORE);
      printf("Retry? 1 o 0\n");
@@ -389,9 +395,4 @@ int main()
                 printf("\n");
          }           
     }
-
-void menu()
-{
-    printf(" 1.Jugar \n 2.Score Total Anterior \n 3.Quit\n");
-}
 
