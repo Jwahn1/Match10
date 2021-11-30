@@ -88,10 +88,10 @@ int main()
          while (GAMEEND==0) //cuando la variable counter sea igual a matchcounter(la cantidad total de matches en el tablero), el juego termina 
          {    
              printf("\n");
-             match = 0; //variable que indica cuando se encuentra un par de cartas
-             repeat=1;
-                
+             
              //resetea estas variables cada vez que se repite el loop del juego 
+             match = 0; 
+             repeat=1;
              cordx=0;
              cordy=0;
              cordx2=0;
@@ -180,16 +180,16 @@ int main()
                  for(j=0; j<11; j++)
                  {
                     
-                     if((i>0 && j>0) && (i<10 && j<10))
+                     if((i>0 && j>0) && (i<10 && j<10)) 
                      {
                          if(((tablerodeljuego[i][j] != tablerodeljuego[i][j-1]) || (tablerodeljuego[i][j] == 0 && tablerodeljuego[i][j-1] == 0)) &&//primer check que determina si existen pares posibles que sean del mismo numeros
                          ((tablerodeljuego[i][j] != tablerodeljuego[i][j+1]) || (tablerodeljuego[i][j] == 0 && tablerodeljuego[i][j+1] == 0)) &&// en las casillas adyacentes lo que se hace casilla por casilla
                          ((tablerodeljuego[i][j] != tablerodeljuego[i+1][j]) || (tablerodeljuego[i][j] == 0 && tablerodeljuego[i+1][j] == 0)) &&
                          ((tablerodeljuego[i][j] != tablerodeljuego[i-1][j]) || (tablerodeljuego[i][j] == 0 && tablerodeljuego[i-1][j] == 0)) &&
                          ((tablerodeljuego[i][j] != tablerodeljuego[i+1][j+1]) || (tablerodeljuego[i][j] == 0 && tablerodeljuego[i+1][j+1] == 0)) &&
-                         ((tablerodeljuego[i][j] != tablerodeljuego[i-1][j-1]) || (tablerodeljuego[i][j] == 0 && tablerodeljuego[i-1][j-1] == 0)) &&
-                         ((tablerodeljuego[i][j] != tablerodeljuego[i+1][j-1]) || (tablerodeljuego[i][j] == 0 && tablerodeljuego[i+1][j-1] == 0)) &&
-                         ((tablerodeljuego[i][j] != tablerodeljuego[i-1][j+1]) || (tablerodeljuego[i][j] == 0 && tablerodeljuego[i-1][j+1] == 0)))
+                         ((tablerodeljuego[i][j] != tablerodeljuego[i-1][j-1]) || (tablerodeljuego[i][j] == 0 && tablerodeljuego[i-1][j-1] == 0)) &&     
+                         ((tablerodeljuego[i][j] != tablerodeljuego[i+1][j-1]) || (tablerodeljuego[i][j] == 0 && tablerodeljuego[i+1][j-1] == 0)) &&    
+                         ((tablerodeljuego[i][j] != tablerodeljuego[i-1][j+1]) || (tablerodeljuego[i][j] == 0 && tablerodeljuego[i-1][j+1] == 0)))     
                          {
                              finisher=finisher+1; //si finisher ==81 entonces todas las casillas no tienen adyacentes del mismo numero
                              
